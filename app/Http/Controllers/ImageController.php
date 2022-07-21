@@ -10,4 +10,12 @@ class ImageController extends Controller
     {
         return view('images.index');
     }
+
+    public function show(){
+
+    }
+
+    public function store(Request $request){
+
+    }
 }
