@@ -14,5 +14,8 @@
         "vite": "^3.0.0",
         "vue": "^3.2.36",
         "vuex": "^4.0.2"
+    },
+    "dependencies": {
+        "@vitejs/plugin-vue": "^3.0.1"
     }
 }
