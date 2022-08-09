@@ -59,6 +59,7 @@ function handleProcessedFile(error, file) {
             label-idle="Click to choose image, or drag here..." 
             server="/upload"
             accepted-file-types="image/*"
+            :allow-multiple="true"
             @processfile="handleProcessedFile" 
             @init="filePondInitialized" />
     </div>
