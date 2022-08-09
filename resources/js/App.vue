@@ -2,6 +2,7 @@
 // Import FilePond
 import vueFilePond, { setOptions } from 'vue-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 
 // Import styles
 import 'filepond/dist/filepond.min.css';
@@ -29,7 +30,7 @@ onMounted(() => {
 })
 
 // Create FilePond component
-const FilePond = vueFilePond(FilePondPluginFileValidateType);
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
 const pond = ref(null);
 
@@ -58,7 +59,8 @@ function handleProcessedFile(error, file) {
             ref="pond" 
             label-idle="Click to choose image, or drag here..." 
             server="/upload"
-            accepted-file-types="image/*"
+            accepted-file-types="image/jpg, image/jpeg, image/png"
+            max-file-size="1MB"
             :allow-multiple="true"
             @processfile="handleProcessedFile" 
             @init="filePondInitialized" />
