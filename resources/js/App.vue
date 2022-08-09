@@ -10,16 +10,23 @@ import { onMounted, ref } from 'vue';
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
 const images = ref(null);
+let serverMessage = {};
 
 onMounted(() => {
     setOptions({
         server: {
             process: {
                 url: './upload',
+                onerror: (response) => {
+                    serverMessage = JSON.parse(response);
+                },
                 headers: {
                     'X-CSRF-TOKEN': token
                 }
             }
+        },
+        labelFileProcessingError: () => {
+            return serverMessage.error;
         }
     });
 
