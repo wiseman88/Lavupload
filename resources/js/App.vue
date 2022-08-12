@@ -1,12 +1,13 @@
 <script setup>
 // Import FilePond
-import vueFilePond, { setOptions } from 'vue-filepond';
+import vueFilePond, {setOptions} from 'vue-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 
 // Import styles
 import 'filepond/dist/filepond.min.css';
-import { onMounted, ref } from 'vue';
+import {onMounted, ref} from 'vue';
+import ImageComponent from './components/ImageComponent.vue';
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
 const images = ref(null);
@@ -30,10 +31,7 @@ onMounted(() => {
         }
     });
 
-    fetch('/images')
-        .then((res) => res.json())
-        .then((json) => (images.value = json))
-        .catch((err) => error.value = err)
+    fetchImages();
 })
 
 // Create FilePond component
@@ -54,6 +52,13 @@ function handleProcessedFile(error, file) {
 
     images.value.unshift(file.serverId);
 }
+
+function fetchImages() {
+    fetch('/images')
+        .then((res) => res.json())
+        .then((json) => (images.value = json))
+        .catch((err) => error.value = err)
+}
 </script>
 
 <template>
@@ -61,23 +66,21 @@ function handleProcessedFile(error, file) {
         <h1 class="text-xl font-bold text-center mb-6">
             Image uploader
         </h1>
-        <file-pond 
-            name="image" 
-            ref="pond" 
-            label-idle="Click to choose image, or drag here..." 
+        <file-pond
+            name="image"
+            ref="pond"
+            label-idle="Click to choose image, or drag here..."
             server="/upload"
             accepted-file-types="image/jpg, image/jpeg, image/png"
             max-file-size="1MB"
             :allow-multiple="true"
-            @processfile="handleProcessedFile" 
-            @init="filePondInitialized" />
+            @processfile="handleProcessedFile"
+            @init="filePondInitialized"/>
     </div>
     <div class="mt-8">
         <h3 class="font-bold text-xl text-center">Image Gallery</h3>
         <div class="container mx-auto grid grid-cols-5 gap-8 justify-evenly mt-4">
-            <div v-for="(image, index) in images" :key="index">
-                <img :src="'/storage/images/' + image" alt="">
-            </div>
+            <ImageComponent :images="images"/>
         </div>
     </div>
 </template>
