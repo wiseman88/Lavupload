@@ -79,7 +79,8 @@ function fetchImages() {
     </div>
     <div class="mt-8">
         <h3 class="font-bold text-xl text-center">Image Gallery</h3>
-        <div class="container mx-auto grid grid-cols-5 gap-8 justify-evenly mt-4">
+        <div
+            class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md-grid-cols-3 lg:grid-cols-5 gap-8 justify-evenly mt-4">
             <ImageComponent :images="images"/>
         </div>
     </div>
