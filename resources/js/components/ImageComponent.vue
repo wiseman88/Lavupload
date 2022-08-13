@@ -1,4 +1,7 @@
 <script setup>
+import {useImageStore} from "../stores/ImageStore.js";
+
+let image = useImageStore();
 defineProps({
     images: Object,
 });
@@ -10,6 +13,9 @@ function openModal(image) {
 }
 </script>
 <template>
+    <p>
+        {{ image }}
+    </p>
     <div v-for="(image, index) in images" :key="index">
         <a href="" @click.prevent="openModal()">
             <img :src="'/storage/images/' + image" alt="">
