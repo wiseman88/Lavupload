@@ -32,8 +32,6 @@ onMounted(() => {
             return serverMessage.error;
         }
     });
-
-    fetchImages();
 })
 
 // Create FilePond component
@@ -53,13 +51,6 @@ function handleProcessedFile(error, file) {
     }
 
     images.value.unshift(file.serverId);
-}
-
-function fetchImages() {
-    fetch('/images')
-        .then((res) => res.json())
-        .then((json) => (images.value = json))
-        .catch((err) => error.value = err)
 }
 </script>
 
