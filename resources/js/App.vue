@@ -7,13 +7,18 @@ import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 // Import styles
 import 'filepond/dist/filepond.min.css';
 import { onMounted, ref } from 'vue';
-import ImageComponent from './components/ImageComponent.vue';
-import ModalComponent from "./components/ModalComponent.vue";
+
+//Import Components
+import ImagesComponent from './components/images/ImagesComponent.vue';
+import ModalComponent from './components/ModalComponent.vue';
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
 const images = ref(null);
 let serverMessage = {};
 let showModal = ref(false);
+// Create FilePond component
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
+const pond = ref(null);
 
 onMounted(() => {
     setOptions({
@@ -33,11 +38,6 @@ onMounted(() => {
         }
     });
 })
-
-// Create FilePond component
-const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
-
-const pond = ref(null);
 
 function filePondInitialized() {
     console.log('Filepond is ready');
@@ -74,7 +74,7 @@ function handleProcessedFile(error, file) {
         <h3 class="font-bold text-xl text-center">Image Gallery</h3>
         <div
             class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md-grid-cols-3 lg:grid-cols-5 gap-8 justify-evenly mt-4">
-            <ImageComponent @showModal="showModal = true"/>
+            <ImagesComponent @showModal="showModal = true"/>
         </div>
         <ModalComponent v-show="showModal" @closeModal="showModal = false"/>
     </div>

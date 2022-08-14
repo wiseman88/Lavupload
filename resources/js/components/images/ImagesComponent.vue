@@ -1,18 +1,17 @@
 <script setup>
-import { useImageStore } from "../stores/ImageStore.js";
+import { useImageStore } from "/resources/js/stores/ImageStore.js";
 import { onMounted } from "vue";
 
 const imageStore = useImageStore();
-
 const emit = defineEmits(['showModal']);
-
-function openModal(image) {
-    emit('showModal');
-}
 
 onMounted(() => {
     imageStore.fetchImages();
 });
+
+function openModal(image) {
+    emit('showModal');
+}
 </script>
 <template>
     <div v-for="(image, index) in imageStore.getImages" :key="index">
