@@ -8,6 +8,7 @@ import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 import 'filepond/dist/filepond.min.css';
 import {onMounted, ref} from 'vue';
 import ImageComponent from './components/ImageComponent.vue';
+import ModalComponent from "./components/ModalComponent.vue";
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
 const images = ref(null);
@@ -84,18 +85,7 @@ function fetchImages() {
             class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md-grid-cols-3 lg:grid-cols-5 gap-8 justify-evenly mt-4">
             <ImageComponent :images="images" @showModal="showModal = true"/>
         </div>
-        <div class="inset-0 fixed bg-slate-900/75 grid place-items-center" v-show="showModal">
-            <div class="bg-white w-[800px] h-[500px] rounded-lg relative">
-                <button @click="showModal = false" class="absolute top-4 right-4">
-                    <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
+        <ModalComponent v-show="showModal" @closeModal="showModal = false"/>
     </div>
 </template>
 
