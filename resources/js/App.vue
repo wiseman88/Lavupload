@@ -1,12 +1,12 @@
 <script setup>
 // Import FilePond
-import vueFilePond, {setOptions} from 'vue-filepond';
+import vueFilePond, { setOptions } from 'vue-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 
 // Import styles
 import 'filepond/dist/filepond.min.css';
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 import ImageComponent from './components/ImageComponent.vue';
 import ModalComponent from "./components/ModalComponent.vue";
 
@@ -45,7 +45,7 @@ function filePondInitialized() {
 }
 
 function handleProcessedFile(error, file) {
-    if (error) {
+    if ( error ) {
         console.log(error)
         return;
     }
@@ -74,7 +74,7 @@ function handleProcessedFile(error, file) {
         <h3 class="font-bold text-xl text-center">Image Gallery</h3>
         <div
             class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md-grid-cols-3 lg:grid-cols-5 gap-8 justify-evenly mt-4">
-            <ImageComponent :images="images" @showModal="showModal = true"/>
+            <ImageComponent @showModal="showModal = true"/>
         </div>
         <ModalComponent v-show="showModal" @closeModal="showModal = false"/>
     </div>
