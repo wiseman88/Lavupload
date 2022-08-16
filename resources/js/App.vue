@@ -11,11 +11,12 @@ import { onMounted, ref } from 'vue';
 //Import Components
 import GalleryComponent from './components/gallery/GalleryComponent.vue';
 import ModalComponent from './components/ModalComponent.vue';
+import { useImageStore } from "/resources/js/stores/ImageStore.js";
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
 const images = ref(null);
+const imageStore = useImageStore();
 let serverMessage = {};
-let showModal = ref(false);
 // Create FilePond component
 const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 const pond = ref(null);
@@ -74,9 +75,9 @@ function handleProcessedFile(error, file) {
         <h3 class="font-bold text-xl text-center">Image Gallery</h3>
         <div
             class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md-grid-cols-3 lg:grid-cols-5 gap-8 justify-evenly mt-4">
-            <GalleryComponent @showModal="showModal = true"/>
+            <GalleryComponent/>
         </div>
-        <ModalComponent v-show="showModal" @closeModal="showModal = false"/>
+        <ModalComponent v-show="imageStore.showModal" @closeModal="showModal = false"/>
     </div>
 </template>
 

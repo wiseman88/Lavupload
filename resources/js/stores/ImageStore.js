@@ -1,9 +1,10 @@
-import {defineStore} from "pinia";
+import { defineStore } from "pinia";
 
 export let useImageStore = defineStore('image', {
     state() {
         return {
-            images: []
+            images: [],
+            showModal: false
         }
     },
     getters: {
@@ -15,8 +16,11 @@ export let useImageStore = defineStore('image', {
         fetchImages() {
             fetch('/images')
                 .then((res) => res.json())
-                .then((json) => (this.images = json))
+                .then((json) => ( this.images = json ))
                 .catch((err) => error.value = err)
+        },
+        showModalItem() {
+            this.showModal = true;
         }
     }
 });
