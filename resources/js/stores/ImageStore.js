@@ -4,7 +4,8 @@ export let useImageStore = defineStore('image', {
     state() {
         return {
             images: [],
-            showModal: false
+            showModal: false,
+            imageSrc: null,
         }
     },
     getters: {
@@ -19,8 +20,9 @@ export let useImageStore = defineStore('image', {
                 .then((json) => ( this.images = json ))
                 .catch((err) => error.value = err)
         },
-        showModalItem() {
+        showModalItem(prop) {
             this.showModal = true;
+            this.imageSrc = prop;
         }
     }
 });

@@ -10,7 +10,7 @@ const imageStore = useImageStore();
 </script>
 
 <template>
-    <a href="" @click.prevent="imageStore.showModalItem()">
+    <a href="" @click.prevent="imageStore.showModalItem(props.image)">
         <img :src="'/storage/images/' + props.image" alt="">
     </a>
 </template>
