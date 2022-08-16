@@ -1,6 +1,8 @@
 <script setup>
 import { useImageStore } from "/resources/js/stores/ImageStore.js";
 import { onMounted } from "vue";
+import GalleryItemComponent from "./GalleryItemComponent.vue";
+
 
 const imageStore = useImageStore();
 const emit = defineEmits(['showModal']);
@@ -15,9 +17,7 @@ function openModal(image) {
 </script>
 <template>
     <div v-for="(image, index) in imageStore.getImages" :key="index">
-        <a href="" @click.prevent="openModal()">
-            <img :src="'/storage/images/' + image" alt="">
-        </a>
+        <GalleryItemComponent :image="image"/>
     </div>
 </template>
 <style>
