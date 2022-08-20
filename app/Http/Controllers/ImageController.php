@@ -12,11 +12,13 @@ class ImageController extends Controller
         return view('images.index');
     }
 
-    public function show(){
-        return Image::latest()->pluck('name')->toArray();
+    public function show()
+    {
+        return Image::latest()->pluck('name', 'id')->toArray();
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if (!$request->hasFile('image')) {
             return response()->json(['error' => 'There is no image present.'], 400);
         }
@@ -34,9 +36,9 @@ class ImageController extends Controller
         $uploadedFile = $request->file('image');
 
         $image = Image::create([
-            'name'      => $uploadedFile->hashName(),
+            'name' => $uploadedFile->hashName(),
             'extension' => $uploadedFile->extension(),
-            'size'      => $uploadedFile->getSize(),
+            'size' => $uploadedFile->getSize(),
         ]);
 
         return $image->name;

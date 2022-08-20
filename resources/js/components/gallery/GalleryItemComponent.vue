@@ -4,6 +4,7 @@ import { useImageStore } from "/resources/js/stores/ImageStore.js";
 
 const props = defineProps({
     image: String,
+    index: String,
 });
 
 const imageStore = useImageStore();
@@ -11,6 +12,7 @@ const imageStore = useImageStore();
 
 <template>
     <a href="" @click.prevent="imageStore.showModalItem(props.image)">
+        <span>{{ props.index }}</span>
         <img :src="'/storage/images/' + props.image" alt="">
     </a>
 </template>

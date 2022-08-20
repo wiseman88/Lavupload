@@ -6,6 +6,7 @@ export let useImageStore = defineStore('image', {
             images: [],
             showModal: false,
             imageSrc: null,
+            error: []
         }
     },
     getters: {

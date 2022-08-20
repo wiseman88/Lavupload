@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 <template>
     <div v-for="(image, index) in imageStore.getImages" :key="index">
-        <GalleryItemComponent :image="image"/>
+        <GalleryItemComponent :image="image" :index="index"/>
     </div>
 </template>
 <style>
